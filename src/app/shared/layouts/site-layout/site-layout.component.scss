@@ -1,0 +1,30 @@
+.header {
+  background-color: #dbaabb;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.sections {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.divider {
+  margin: 0 10px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.active {
+  font-weight: bold;
+}
+
+li {
+  list-style: none;
+}

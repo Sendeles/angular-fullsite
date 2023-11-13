@@ -1,0 +1,25 @@
+<div class="header">
+  <h1>Super Site</h1>
+  <div *ngIf="showSiteLayout" class="sections">
+    <div>
+      <a [routerLink]="['/']">Home</a>
+    </div>
+    <div class="divider">
+      <a [routerLink]="['/news']">News</a>
+    </div>
+    <div class="divider">
+      <a [routerLink]="['/create']">Create</a>
+    </div>
+    <div>
+      <a [routerLink]="['/posts']">Posts</a>
+    </div>
+    <div class="divider">
+      <a [routerLink]="['/logout']">Logout</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

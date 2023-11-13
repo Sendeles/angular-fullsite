@@ -1,0 +1,32 @@
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()" class="post-form">
+  <h1>Creating a new post</h1>
+  <div class="form-group">
+    <label for="author">Post Author&nbsp;<span class="necessarily">*</span>:</label>
+    <div class="necessarily in_end"
+         *ngIf="form.controls['author'].invalid && (form.controls['author'].dirty || form.controls['author'].touched)">
+      Обязательное поле
+    </div>
+    <input id="author" type="text" placeholder="Enter here" formControlName="author" required>
+  </div>
+  <div class="form-group">
+    <label for="title">Post Title&nbsp;<span class="necessarily">*</span>:</label>
+    <div class="necessarily in_end"
+         *ngIf="form.controls['title'].invalid && (form.controls['title'].dirty || form.controls['title'].touched)">
+      Обязательное поле
+    </div>
+    <input id="title" type="text" placeholder="Enter here" formControlName="title" required>
+  </div>
+  <div class="form-group">
+    <label for="content">Post Content&nbsp;<span class="necessarily">*</span>:</label>
+    <div class="necessarily in_end"
+         *ngIf="form.controls['content'].invalid && (form.controls['content'].dirty || form.controls['content'].touched)">
+      Обязательное поле
+    </div>
+<!--    <textarea id="content" placeholder="Enter here" formControlName="content" required></textarea>-->
+    <quill-editor
+      [styles]="editorStyles"
+      id="content" formControlName="content"></quill-editor>
+  </div>
+  <button type="submit" (click)="onSubmit()" [disabled]="form.invalid">Create Post</button>
+</form>

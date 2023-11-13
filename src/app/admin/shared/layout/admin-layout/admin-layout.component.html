@@ -1,0 +1,32 @@
+<div>
+  <nav class="header">
+    <h1>Angular Admin</h1>
+<!--    <div *ngIf="showAdminLayout">-->
+      <div *ngIf="auth.isAuthenticated()" class="sections">
+        <nav *ngIf="auth.isAdmin" class="divider">
+          <li routerLinkActive='active'>
+            <a [routerLink]="['/admin/create']">Create</a>
+          </li>
+        </nav>
+        <nav class="divider">
+          <li routerLinkActive='active'>
+            <a [routerLink]="['/admin/dashboard']">Dashboard</a>
+          </li>
+        </nav>
+        <nav class="divider">
+          <li>
+            <a [routerLink]="['/admin/edit']">Edit</a>
+          </li>
+        </nav>
+        <div>
+          <li>
+            <a href="#" (click)="logout($event)">Logout</a>
+          </li>
+        </div>
+      </div>
+<!--    </div>-->
+  </nav>
+</div>
+
+
+<router-outlet></router-outlet>

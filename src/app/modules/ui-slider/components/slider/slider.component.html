@@ -1,0 +1,34 @@
+<!--<p>slider works!</p>-->
+
+<!--<h1>Static slides example</h1>-->
+<!--<owl-carousel-o [options]="customOptions">-->
+<!--  <ng-template carouselSlide>Slide 1</ng-template>-->
+<!--  <ng-template carouselSlide>Slide 2</ng-template>-->
+<!--  <ng-template carouselSlide>Slide 3</ng-template>-->
+<!--</owl-carousel-o>-->
+<!--<div>Some tags after</div>-->
+
+<!--<hr>-->
+
+<!--<h2>Dynamic slides example</h2>-->
+<div class="container">
+  <ng-content></ng-content>
+
+
+  <owl-carousel-o class="owl-theme" [options]="customOptions">
+    <ng-container *ngFor="let slide of slidesStore">
+      <ng-template carouselSlide>
+        <div class="custom-slide">
+          <img class="resized_image" [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-template carouselPrev>
+      <div class="owl-prev"></div>
+    </ng-template>
+    <ng-template carouselNext>
+      <div class="owl-next"></div>
+    </ng-template>
+
+  </owl-carousel-o>
+</div>

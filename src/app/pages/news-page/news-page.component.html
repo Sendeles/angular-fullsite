@@ -1,0 +1,16 @@
+<div *ngFor="let item of data | async">
+  <div class="news_source_date">
+    <span class="news_source">{{item.source_id}}</span>
+    <span>{{item.pubDate}}</span>
+  </div>
+  <div class="news_autor_country">
+    <div *ngFor="let creator of item.creator">
+      <span>Author: {{creator}}</span>
+    </div>
+    <span class="news_country">Country: {{item.country}}</span>
+  </div>
+  <h2 class="news_title">{{item.title}}</h2>
+  <span>{{item.description}}</span>
+  <hr>
+</div>
+

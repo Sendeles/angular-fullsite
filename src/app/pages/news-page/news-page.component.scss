@@ -1,0 +1,27 @@
+.news_source_date {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 40px;
+}
+
+.news_autor_country {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-items: center;
+  margin: 15px 40px;
+  grid-column: 1 / 2;
+}
+
+.news_source {
+  text-transform: capitalize;
+}
+
+.news_country {
+  text-transform: capitalize;
+}
+
+.news_title {
+  display: flex;
+  justify-content: center;
+}

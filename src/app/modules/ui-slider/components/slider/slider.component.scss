@@ -1,0 +1,26 @@
+
+.owl-theme {
+  .owl-prev {
+    background-image: url("/assets/image/arrow.png");
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    color: red;
+  }
+
+  .owl-next {
+    background-image: url("/assets/image/arrow.png");
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+.resized_image {
+  width: 800px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
