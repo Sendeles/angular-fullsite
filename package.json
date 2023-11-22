@@ -19,7 +19,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
-    "@firebase/app-compat": "^0.2.22",
+    "@firebase/app-compat": "^0.2.23",
     "angular-font-awesome": "^3.1.2",
     "firebase": "^10.5.0",
     "ngx-owl-carousel-o": "^16.0.0",

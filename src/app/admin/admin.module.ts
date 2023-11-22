@@ -22,7 +22,7 @@ import {AuthGuard} from "./shared/services/auth.guard";
     FormsModule,
     ReactiveFormsModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
     AdminCreateComponent

@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
     private router: Router
   ) {}
 
-  //Добавление токена для каждого запроса, если токен присутсвует и пользователь зарегестрирован, отлов ошибок
+  //Добавление токена для каждого запроса, если токен присутсвует и пользователь зарегестрирован(авторизован), отлов ошибок с бэк енда, и если 401 то перенаправляем через параметры
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.auth.isAuthenticated()) {
       req = req.clone({
@@ -25,11 +25,18 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     return next.handle(req)
       .pipe(
+        tap(() => {
+          console.log('Intercept')
+        }),
         catchError((error: HttpErrorResponse) => {
           console.log('interceptor error', error)
           if (error.status === 401) {
             this.auth.logout()
-            this.router.navigate(['/', 'logout'])
+            this.router.navigate(['/', 'logout']), {
+              queryParams: {
+                authFailed: true
+              }
+            }
           }
           return throwError(error);
         })

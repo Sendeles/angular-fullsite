@@ -3,8 +3,9 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {IAuthResponse, IUser} from "../../../shared/models/user/user.model";
 import {BehaviorSubject, catchError, finalize, Observable, Subject, tap, throwError} from "rxjs";
 import {environment} from "../../../../environments/environment";
-// import firebase from 'firebase/compat/app';
-import { getAuth } from 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import {getAuth} from "@angular/fire/auth";
+
 @Injectable()
 
 export class AuthService {
@@ -62,9 +63,17 @@ export class AuthService {
 
 
   getCurrentUserEmail(): string | null {
-    // const user = firebase.auth().currentUser;
-    const user = getAuth().currentUser;
-    return user ? user.email : null;
+    console.log('Проверка инициализации Firebase: ', firebase.apps.length ? 'Инициализирован' : 'Не инициализирован');
+    console.log('Проверка объекта firebase.auth:', firebase.auth);
+
+    try {
+      const user = firebase.auth().currentUser;
+      // const user = getAuth().currentUser;
+      return user ? user.email : null;
+    } catch (error) {
+      console.error('Ошибка при получении текущего пользователя: ', error);
+    }
+    return null;
   }
 
 //высвечивание ошибки в случае неверного ввода логина и пароля

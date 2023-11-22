@@ -35,6 +35,8 @@ export class AdminLoginComponent implements OnInit {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['needToLogin']) {
         this.message = 'данное поле будет доступно после входа'
+      } else if (params['authFailed']) {
+        this.message = 'Cессия истекла, залогиньтесь снова'
       }
     })
   }
