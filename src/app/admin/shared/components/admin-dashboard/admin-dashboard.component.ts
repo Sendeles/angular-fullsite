@@ -11,8 +11,10 @@ import {Subscription} from "rxjs";
 export class AdminDashboardComponent implements OnInit, OnDestroy {
 
 //завожу переменную
-  posts?: IPost[]
+  posts: IPost[] = []
   pSub?: Subscription
+  rSub?: Subscription
+  searchPost = ''
 
   constructor(
     private postsService: PostsService
@@ -28,7 +30,12 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     })
   }
 
+  //в posts.srvice.ts метод прописали а здесь его вызываем
   remove(id: string) {
+   this.rSub = this.postsService.remove(id).subscribe(() => {
+      //перебираем список постов после удаления какого-то поста
+      this.posts = this.posts.filter((post) => post.id !== id)
+    })
 
   }
 
@@ -36,6 +43,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     //отписка для того что бы не было утечек памяти
     if (this.pSub) {
       this.pSub.unsubscribe()
+    }
+
+    if (this.rSub) {
+      this.rSub.unsubscribe()
     }
   }
 }

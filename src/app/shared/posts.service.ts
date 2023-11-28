@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {IFbCreateResponse, IPost} from "../../environments/interface";
 import {environment} from "../../environments/environment";
 import {map, tap} from "rxjs/operators";
+import {pageLink} from "./constants/pagelink";
 
 @Injectable({providedIn: 'root'})
 
@@ -16,7 +17,7 @@ export class PostsService {
 
   //відправка на бекенд посту
   create(post: IPost): Observable<IPost> {
-    return this.http.post<IFbCreateResponse>(`${environment.fbDbUrl}/posts.json`, post)
+    return this.http.post<IFbCreateResponse>(`${environment.fbDbUrl}${pageLink.POSTS_PAGE}.json`, post)
       .pipe(
         map((response: IFbCreateResponse) => {
           return {
@@ -29,10 +30,10 @@ export class PostsService {
 
   //Получение всех постов что у нас есть на бекэнде
   getAll(): Observable<IPost []> {
-    return this.http.get(`${environment.fbDbUrl}/posts.json`)
+    return this.http.get(`${environment.fbDbUrl}${pageLink.POSTS_PAGE}.json`)
       .pipe(
         //вывожу все посты в консоль через tap
-        tap(data => console.log('recive data', data)),
+        tap(data => console.log('getAll', data)),
         // преобразует объект ответа в массив постов.  post1: { author: "1", content: "<p>1</p>", date: "2023-11-15T21:08:14.454Z", title: "1" }, post2: { author: "2", content: "<p>2</p>", date: "2023-11-15T21:08:14.454Z", title: "2" }
         map((response: { [key: string]: any }) => {
           //распарсиваем объект
@@ -43,11 +44,39 @@ export class PostsService {
             .map((key) => ({
               // просто в { author: "1", content: "<p>1</p>", date: "2023-11-15T21:08:14.454Z", title: "1" }, уже без  "post1:" то есть как будто делаем безымянным, тоже самое с post2
               ...response[key],
-              // Добавляем ключ в качестве свойства id, каждый объект получает дополнительно id: "post1" получается:{ author: "1", content: "1", title: "1", date: "2021-01-01T00:00:00.000Z", id: "post1" - и вот добавилось свойство id}, тоже самое с post2, если бы не было id: key было бы просто { author: "1", content: "<p>1</p>", date: "2023-11-15T21:08:14.454Z", title: "1" }
+              // Добавляем ключ в качестве свойства id, каждый объект получает дополнительно id: "post1" получается:{ author: "1", content: "1", title: "1", date: "2021-01-01T00:00:00.000Z", id: "post1" (и вот добавилось свойство id)}, тоже самое с post2, если бы не было id: key было бы просто { author: "1", content: "<p>1</p>", date: "2023-11-15T21:08:14.454Z", title: "1" }
               id: key,
               // Преобразуем строку даты в объект Date  date: [object Date], вместо date: "2021-01-01T00:00:00.000Z"
               date: new Date(response[key].date)
             }))
         }))
   }
+
+  getByID(id: string): Observable<IPost> {
+    return this.http.get<IPost>(`${environment.fbDbUrl}${pageLink.POSTS_PAGE}/${id}.json`)
+            .pipe(
+        tap(data => console.log('getByID', data)),
+        map((post: IPost) => {
+          return {
+            //Вставляем данные поста, В этом коде ...post - это оператор расширения (spread operator), который используется для копирования всех свойств из объекта post. Это означает, что все свойства, которые есть в объекте post, будут скопированы в новый объект. В данном случае, если объект post содержит свойства date, content и author, то они будут скопированы в новый объект.
+            ...post,
+            //Свойство id получает значение, которое было передано в функцию getByID, а свойство date преобразуется в объект Date из строки, которая была получена из объекта post. Свойство id берется из аргумента функции getByID, а новое свойство date создается из строки даты, которая была получена из объекта post.
+            id,
+            date: new Date(post.date)
+          }
+        }))
+  }
+
+  //Метод удаления с самого бэкенда
+  remove(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.fbDbUrl}${pageLink.POSTS_PAGE}/${id}.json`)
+  }
+
+  //Метод обновления поста на бекенд
+  update(post: IPost): Observable<IPost> {
+    return this.http.patch<IPost>(`${environment.fbDbUrl}${pageLink.POSTS_PAGE}/${post.id}.json`, post)
+  }
 }
+
+
+

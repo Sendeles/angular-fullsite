@@ -1,7 +1,7 @@
 <!--пока грузяться посты что бы показывался текст с загрузкой-->
 <div *ngIf="posts?.length; else loading">
   <div>
-    <input type="text" placeholder="Search">
+    <input type="text" placeholder="Search" [(ngModel)]="searchPost">
   </div>
   <table>
     <thead>
@@ -14,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let post of posts; let idx = index">
+    <tr *ngFor="let post of posts | searchPosts: searchPost; let idx = index">
       <td>{{idx + 1}}</td>
       <td>{{post.author}}</td>
       <td>{{post.title}}</td>

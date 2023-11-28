@@ -23,7 +23,6 @@
          *ngIf="form.controls['content'].invalid && (form.controls['content'].dirty || form.controls['content'].touched)">
       Обязательное поле
     </div>
-<!--    <textarea id="content" placeholder="Enter here" formControlName="content" required></textarea>-->
     <quill-editor
       [styles]="editorStyles"
       id="content" formControlName="content"></quill-editor>
