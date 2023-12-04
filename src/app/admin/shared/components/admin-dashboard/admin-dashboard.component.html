@@ -1,7 +1,7 @@
 <!--пока грузяться посты что бы показывался текст с загрузкой-->
-<div *ngIf="posts?.length; else loading">
+<div class="posts-container" *ngIf="posts?.length; else loading">
   <div>
-    <input type="text" placeholder="Search" [(ngModel)]="searchPost">
+    <input class="search_post" type="text" placeholder="Search" [(ngModel)]="searchPost">
   </div>
   <table>
     <thead>
@@ -9,6 +9,7 @@
       <th>#</th>
       <th>Автор</th>
       <th>Название</th>
+      <th>Содержание</th>
       <th>Дата</th>
       <th>Действие</th>
     </tr>
@@ -18,6 +19,8 @@
       <td>{{idx + 1}}</td>
       <td>{{post.author}}</td>
       <td>{{post.title}}</td>
+      <td [innerHTML]="truncateText(post.content)"></td>
+<!--      <td [innerHTML]="truncateText(post)">{{post.content | slice:0:20}}</td>-->
       <td>{{post.date | date: 'medium'}}</td>
       <td>
         <button [routerLink]="['/admin', 'post', post.id, 'edit']">Open</button>

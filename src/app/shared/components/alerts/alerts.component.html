@@ -1,0 +1,10 @@
+<!--показывать в том случае если текст у нас присутсвует-->
+<div class="alert-wrap" *ngIf="text">
+  <!--  ngClass - Динамический класс в зависимости от типа туда передаем объект-->
+  <!--  Различные типа, будет использоваться тот класс если будет использоваться тип success-->
+  <div [class.alert-success]="type === 'success'"
+       [class.alert-warning]="type === 'warning'"
+       [class.alert-delete]="type === 'delete'">
+    {{text}}
+  </div>
+</div>

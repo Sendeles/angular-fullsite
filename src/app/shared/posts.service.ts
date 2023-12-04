@@ -19,6 +19,7 @@ export class PostsService {
   create(post: IPost): Observable<IPost> {
     return this.http.post<IFbCreateResponse>(`${environment.fbDbUrl}${pageLink.POSTS_PAGE}.json`, post)
       .pipe(
+        tap(data => console.log('Create Post', data)),
         map((response: IFbCreateResponse) => {
           return {
             ...post,

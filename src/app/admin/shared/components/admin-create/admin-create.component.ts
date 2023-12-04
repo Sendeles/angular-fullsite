@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {IPost} from "../../../../../environments/interface";
 import {PostsService} from "../../../../shared/posts.service";
+import {AlertServices} from "../../../../shared/services/alert.services";
 
 @Component({
   selector: 'app-admin-create',
@@ -23,21 +24,30 @@ export class AdminCreateComponent implements OnInit {
     date: new FormControl(new Date())
   });
 
-  constructor(private postServ: PostsService) {
+  constructor(
+    private postServ: PostsService,
+    private alertServ: AlertServices
+  ) {
   }
 
   ngOnInit() {
 
   }
 
+  //функция которая не позволяет что бы поля оставались пустые, мы ее задействуем в сабмите
+  //Object.values(this.form.controls): Эта строка извлекает все элементы управления (controls), которые являются частью формы
+  //.forEach(control => {...}): Здесь используется метод forEach для перебора всех элементов управления в форме. Для каждого элемента управления (указанного как control) выполняется функция, указанная внутри фигурных скобок.
   markAsNecessery() {
     Object.values(this.form.controls).forEach(control => {
-      control.markAsTouched()
+      control.markAsTouched();
+      console.log( ' control.markAsTouched()', control.markAsTouched())
     });
+
   }
 
   //Сама кнопка onSubmit
   onSubmit(): void {
+    console.log( 'this.form', this.form)
     if (this.form.valid) {
       console.log('this.form.getRawValue()', this.form.getRawValue());
     } else {
@@ -55,6 +65,7 @@ export class AdminCreateComponent implements OnInit {
     //что бы после успешного поста на бекенд очищался пост
     this.postServ.create(post).subscribe(() => {
       this.form.reset()
+      this.alertServ.success('Пост был создан')
     })
   }
 

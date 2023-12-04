@@ -17,6 +17,8 @@ import {SharedModule} from "./shared/shared.module";
 
 import {CreatePageComponent} from './pages/create-page/create-page.component';
 import {AuthInterceptor} from "./shared/auth.interceptor";
+import {CommonModule} from "@angular/common";
+import {AlertServices} from "./shared/services/alert.services";
 // import { RegistrationPageComponent } from './shared/components/registration-page/registration-page.component';
 
 const firebaseConfig = {
@@ -52,7 +54,8 @@ const INTERCEPTORS_PROVIDER: Provider = {
     AngularFireAuthModule
   ],
   providers: [
-    INTERCEPTORS_PROVIDER
+    INTERCEPTORS_PROVIDER,
+    AlertServices
   ],
   exports: [],
   bootstrap: [AppComponent]

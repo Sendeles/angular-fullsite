@@ -21,7 +21,7 @@ export class AuthGuard {
       this.router.navigate(['/', 'logout'], {
         queryParams: {
           needToLogin: true,
-          notAdmin: !this.auth.isAdmin()
+          // notAdmin: !this.auth.isAdmin()
         }
       })
       return false

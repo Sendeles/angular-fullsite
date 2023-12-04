@@ -6,6 +6,7 @@ import {IPost} from "../../../../../environments/interface";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../../../environments/environment";
 import {pageLink} from "../../../../shared/constants/pagelink";
+import {AlertServices} from "../../../../shared/services/alert.services";
 
 @Component({
   selector: 'app-edit-page',
@@ -29,7 +30,8 @@ export class AdminEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private postService: PostsService
+    private postService: PostsService,
+    private alertServices: AlertServices
   ) {
   }
 
@@ -73,6 +75,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         title: this.form.value.title
       }).subscribe(() => {
         this.submitted = false
+        this.alertServices.success('Пост был обновлен')
       })
     }
 

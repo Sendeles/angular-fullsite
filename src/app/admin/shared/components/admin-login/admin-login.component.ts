@@ -33,12 +33,14 @@ export class AdminLoginComponent implements OnInit {
   //Внутри подписчика проверяется, содержит ли объект params свойство needToLogin. Если это свойство присутствует и истинно, для свойства message компонента устанавливается сообщение на русском языке: "данное поле будет доступно после входа
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
+      console.log('this.route', this.route)
       if (params['needToLogin']) {
         this.message = 'данное поле будет доступно после входа'
       } else if (params['authFailed']) {
         this.message = 'Cессия истекла, залогиньтесь снова'
       }
     })
+    console.log('this.route', this.route)
   }
 
 
@@ -68,7 +70,8 @@ export class AdminLoginComponent implements OnInit {
     console.log('user', user)
     this.auth.login(user).subscribe({
       next: () => {
-        this.form.reset()
+        //если неуспешный логин что бы была возможность снова залогиниться без обновления страницы
+        this.form.reset();
         this.submitted = false
         if (user.email === 'test@gmail.com') {
           this.router.navigate(['/admin', 'dashboard'])
