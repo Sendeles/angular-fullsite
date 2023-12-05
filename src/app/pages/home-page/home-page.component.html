@@ -1,11 +1,8 @@
 <!--Стрим пропускаем через асинк пайп что бы англуяр получил данные относительно этого стрима и потом необходимо перобразовать данные из этого стрима в локальную переменную post-->
-<!--<div *ngIf="posts$ | async as posts; else loading">-->
-<!--  <app-posts-page *ngFor="let post of posts" [post]="post">-->
-<!--  </app-posts-page>-->
-<!--</div>-->
-
-<div>
-  <app-post></app-post>
+<div *ngIf="posts$ | async as posts; else loading">
+  <app-post *ngFor="let post of posts"
+                  [post]="post">
+  </app-post>
 </div>
 
 <div>

@@ -43,10 +43,6 @@ const routes: Routes = [
         path: 'create',
         loadChildren: () => import('./pages/create-page/create-page.module').then(m => m.CreatePageModule)
       },
-      // {
-      //   path: 'admcreate',
-      //   loadChildren: () => import('./admin/shared/components/admin-create/admin-create.module').then(m => m.AdminCreateModule)
-      // },
       {
         path: '**',
         redirectTo: '/', pathMatch: 'full'

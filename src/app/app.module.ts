@@ -17,9 +17,12 @@ import {SharedModule} from "./shared/shared.module";
 
 import {CreatePageComponent} from './pages/create-page/create-page.component';
 import {AuthInterceptor} from "./shared/auth.interceptor";
-import {CommonModule} from "@angular/common";
+import {CommonModule, registerLocaleData} from "@angular/common";
+import uaLocale from "@angular/common/locales/ru-UA";
 import {AlertServices} from "./shared/services/alert.services";
 // import { RegistrationPageComponent } from './shared/components/registration-page/registration-page.component';
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyB6CTb_LhX3qJ7YbLqp3ydbbP0-TGIBAbs",
@@ -37,6 +40,9 @@ const INTERCEPTORS_PROVIDER: Provider = {
   multi: true,
   useClass: AuthInterceptor
 }
+
+registerLocaleData(uaLocale, 'ua')
+
 
 @NgModule({
   declarations: [

@@ -1,17 +1,15 @@
 <div class="color">
   <div>
-    <h2>Post Title</h2>
+    <h2>{{post.title}}</h2>
   </div>
   <div>
-    <strong>Autor</strong>
+    <strong>{{post.author}}</strong>
     <small>
-      10.09.2023
+      {{post.date | date: 'dd.MM.yyyy'}}
     </small>
   </div>
   <div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolore doloribus in praesentium quisquam
-      repellat? Accusamus accusantium aspernatur beatae deleniti deserunt facere laudantium, molestias nemo nobis
-      placeat quis quod repellat.</p>
+    <p>{{post.content}}</p>
   </div>
-  <button [routerLink]="['/posts', 123]">Открыть</button>
+  <button [routerLink]="['/posts', post.id]">Открыть</button>
 </div>

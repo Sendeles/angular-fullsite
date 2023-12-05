@@ -5,20 +5,23 @@ import {UiSliderModule} from "../../modules/ui-slider/ui-slider.module";
 import {PostsPageModule} from "../posts-page/posts-page.module";
 import {PostComponent} from "../../shared/components/post/post.component";
 import {AdminModule} from "../../admin/admin.module";
+import {CommonModule} from "@angular/common";
+
 
 @NgModule({
   declarations: [
     HomePageComponent,
     PostComponent
   ],
-    imports: [
-        HomePageRoutingModule,
-        UiSliderModule,
-        PostsPageModule,
-        AdminModule
-    ],
+  imports: [
+    CommonModule,
+    HomePageRoutingModule,
+    UiSliderModule,
+    AdminModule,
+  ],
   exports: [
-    HomePageComponent
+    HomePageComponent,
+    PostComponent
   ]
 })
 
