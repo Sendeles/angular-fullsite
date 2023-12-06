@@ -1,4 +1,4 @@
-<div *ngFor="let item of data | async">
+<div *ngFor="let item of data | async; else loading">
   <div class="news_source_date">
     <span class="news_source">{{item.source_id}}</span>
     <span>{{item.pubDate}}</span>
@@ -14,3 +14,6 @@
   <hr>
 </div>
 
+<ng-template #loading>
+  Идет загрузка....
+</ng-template>

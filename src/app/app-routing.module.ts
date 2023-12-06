@@ -52,6 +52,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  //настраивает маршрутизацию с использованием заданных маршрутов и стратегии предварительной загрузки всех модулей.
   imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })

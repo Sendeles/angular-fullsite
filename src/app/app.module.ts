@@ -20,6 +20,7 @@ import {AuthInterceptor} from "./shared/auth.interceptor";
 import {CommonModule, registerLocaleData} from "@angular/common";
 import uaLocale from "@angular/common/locales/ru-UA";
 import {AlertServices} from "./shared/services/alert.services";
+import {TruncateServices} from "./shared/services/truncate.services";
 // import { RegistrationPageComponent } from './shared/components/registration-page/registration-page.component';
 
 
@@ -61,7 +62,8 @@ registerLocaleData(uaLocale, 'ua')
   ],
   providers: [
     INTERCEPTORS_PROVIDER,
-    AlertServices
+    AlertServices,
+    TruncateServices
   ],
   exports: [],
   bootstrap: [AppComponent]
